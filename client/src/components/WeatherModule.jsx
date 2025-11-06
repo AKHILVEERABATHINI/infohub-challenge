@@ -10,7 +10,10 @@ export default function WeatherModule(){
   async function fetchWeather(qCity){
     try{
       setLoading(true); setError(''); setData(null)
-      const res = await axios.get(`/api/weather?city=${encodeURIComponent(qCity)}`)
+      const BASE = import.meta.env.VITE_API_BASE || '';
+
+      const res = await axios.get(`${BASE}/api/weather?city=${city}`)
+
       if(res.data && res.data.success){
         setData(res.data.weather)
       } else {

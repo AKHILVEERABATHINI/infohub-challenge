@@ -9,7 +9,9 @@ export default function QuoteGenerator(){
   async function fetchQuote(){
     try{
       setLoading(true); setError(''); setQuote(null)
-      const res = await axios.get('/api/quote')
+      const BASE = import.meta.env.VITE_API_BASE || '';
+
+      const res = await axios.get(`${BASE}/api/quote`)
       if(res.data && res.data.success) setQuote(res.data.quote)
       else setError('Unexpected response from quote API')
     }catch(err){

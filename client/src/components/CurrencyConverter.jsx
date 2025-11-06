@@ -10,7 +10,9 @@ export default function CurrencyConverter(){
   async function convert(){
     try{
       setLoading(true); setError(''); setResult(null)
-      const res = await axios.get(`/api/currency?amount=${encodeURIComponent(amount)}`)
+      const BASE = import.meta.env.VITE_API_BASE || '';
+
+      const res = await axios.get(`${BASE}/api/currency?amount=${amount}`)
       if(res.data && res.data.success) setResult(res.data)
       else setError('Unexpected response from currency API')
     }catch(err){
